@@ -1,5 +1,3 @@
-clear variables
-clc
 
 import /Forces/.*
 %% Parameters
