@@ -6,8 +6,8 @@ function out = PilotDepth(in, memory, parameters)
 coder.extrinsic('lqrd'); 
 %% Compute deltas 
 C = eye(5);
-Q = eye(5);%diag([1e-6,1,100,10,0.1]);
-R = 1;
+Q = diag([1e-6,1,100,10,0.1]);
+R = 1e9;
 [BARo, thetao] = smlnkGetEquilibriumPoint(in.u_ms);
 wo = 2*tan(thetao); 
 qo=0;
