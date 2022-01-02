@@ -22,75 +22,75 @@ axis tight; xlabel('DateTime'); ylabel('Depth (m)');
 title('Depth profil');  set(gca,'Ydir','reverse');
 legend([p1 p2],'depth', 'depth_{command}'); clear h1 h2 p1 p2 z_cmd
 
-%% Vehicle State : XY Plot
-figure('Name','XY Plot','units','normalized','outerposition',[0 0 1 1]);
-plot(vehicle_state.eta.rABS_Position.y_m.Data,...
-    vehicle_state.eta.rABS_Position.x_m.Data); grid on;
-title('XY Plot');xlabel('East (m)'); ylabel('North (m)');
+% %% Vehicle State : XY Plot
+% figure('Name','XY Plot','units','normalized','outerposition',[0 0 1 1]);
+% plot(vehicle_state.eta.rABS_Position.y_m.Data,...
+%     vehicle_state.eta.rABS_Position.x_m.Data); grid on;
+% title('XY Plot');xlabel('East (m)'); ylabel('North (m)');
 
-%% Vehicle State : Angles
-figure('name','Euler angles','units','normalized','outerposition',[0 0 1 1]);
-s1 = subplot(3,1,1); hold on; grid on;
-plot(vehicle_state.eta.EulerAngles.Phi_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Phi_rad.Data));
-roll_cmd = CreateCmd(inputs.command.roll, inputs.Flag.FlagRoll, 1);
-stairs(roll_cmd.Time, rad2deg(roll_cmd.Data)); clear roll_cmd;
-legend('\phi','\phi_{command}');
-title('Roll');xlabel('time (s)'); ylabel('Angle (deg)');
-
-s2 = subplot(3,1,2); hold on; grid on;
-plot(vehicle_state.eta.EulerAngles.Theta_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Theta_rad.Data));
-theta_cmd = CreateCmd(inputs.command.vertical, inputs.Flag.FlagVertical, 2);
-stairs(theta_cmd.Time, rad2deg(theta_cmd.Data)); clear theta_cmd;
-legend('\theta','\theta_{command}');
-title('Theta');xlabel('time (s)'); ylabel('Angle (deg)');
-
-s3 = subplot(3,1,3); hold on; grid on;
-plot(vehicle_state.eta.EulerAngles.Psi_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Psi_rad.Data));
-psi_cmd = CreateCmd(inputs.command.horizontal, inputs.Flag.FlagHorizontal, 1);
-stairs(psi_cmd.Time, rad2deg(psi_cmd.Data)); clear psi_cmd;
-legend('\psi','\psi_{command}');
-title('Psi');xlabel('time (s)'); ylabel('Angle (deg)');
-
-linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
-%% Vehicle State : Speed
-figure('name','Speed','units','normalized','outerposition',[0 0 1 1]);
-s1 = subplot(3,1,1); hold on; grid on;
-plot(vehicle_state.nu.rAUV_WaterSpeed.Uwater_ms);
-u_cmd = CreateCmd(inputs.command.speed, inputs.Flag.FlagForward, 1);
-plot(u_cmd); clear u_cmd;
-legend('u','u_{command}');
-title('Longitudinal Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
-
-s2 = subplot(3,1,2); hold on; grid on;
-plot(vehicle_state.nu.rAUV_WaterSpeed.Vwater_ms);
-title('Transversal Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
-
-s3 = subplot(3,1,3); hold on; grid on;
-plot(vehicle_state.nu.rAUV_WaterSpeed.Wwater_ms);
-title('Lift Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
-
-linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
-%% Vehicle State : AngularSpeed
-figure('name','Angular Speed','units','normalized','outerposition',[0 0 1 1]);
-s1 = subplot(3,1,1); hold on; grid on;
-plot(vehicle_state.nu.AngularSpeed.P_rads.Time, ...
-    rad2deg(vehicle_state.nu.AngularSpeed.P_rads.Data));
-title('Roll Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
-
-s2 = subplot(3,1,2); hold on; grid on;
-plot(vehicle_state.nu.AngularSpeed.Q_rads.Time,...
-    rad2deg(vehicle_state.nu.AngularSpeed.Q_rads.Data));
-title('Pitch Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
-
-s3 = subplot(3,1,3); hold on; grid on;
-plot(vehicle_state.nu.AngularSpeed.R_rads.Time,...
-    rad2deg(vehicle_state.nu.AngularSpeed.R_rads.Data));
-r_cmd = CreateCmd(inputs.command.horizontal, inputs.Flag.FlagHorizontal, 2);
-stairs(r_cmd.Time, rad2deg(r_cmd.Data)); clear r_cmd;
-legend('R','R_{command}');
-title('Yaw Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
-
-linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
+% %% Vehicle State : Angles
+% figure('name','Euler angles','units','normalized','outerposition',[0 0 1 1]);
+% s1 = subplot(3,1,1); hold on; grid on;
+% plot(vehicle_state.eta.EulerAngles.Phi_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Phi_rad.Data));
+% roll_cmd = CreateCmd(inputs.command.roll, inputs.Flag.FlagRoll, 1);
+% stairs(roll_cmd.Time, rad2deg(roll_cmd.Data)); clear roll_cmd;
+% legend('\phi','\phi_{command}');
+% title('Roll');xlabel('time (s)'); ylabel('Angle (deg)');
+% 
+% s2 = subplot(3,1,2); hold on; grid on;
+% plot(vehicle_state.eta.EulerAngles.Theta_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Theta_rad.Data));
+% theta_cmd = CreateCmd(inputs.command.vertical, inputs.Flag.FlagVertical, 2);
+% stairs(theta_cmd.Time, rad2deg(theta_cmd.Data)); clear theta_cmd;
+% legend('\theta','\theta_{command}');
+% title('Theta');xlabel('time (s)'); ylabel('Angle (deg)');
+% 
+% s3 = subplot(3,1,3); hold on; grid on;
+% plot(vehicle_state.eta.EulerAngles.Psi_rad.Time,rad2deg(vehicle_state.eta.EulerAngles.Psi_rad.Data));
+% psi_cmd = CreateCmd(inputs.command.horizontal, inputs.Flag.FlagHorizontal, 1);
+% stairs(psi_cmd.Time, rad2deg(psi_cmd.Data)); clear psi_cmd;
+% legend('\psi','\psi_{command}');
+% title('Psi');xlabel('time (s)'); ylabel('Angle (deg)');
+% 
+% linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
+% %% Vehicle State : Speed
+% figure('name','Speed','units','normalized','outerposition',[0 0 1 1]);
+% s1 = subplot(3,1,1); hold on; grid on;
+% plot(vehicle_state.nu.rAUV_WaterSpeed.Uwater_ms);
+% u_cmd = CreateCmd(inputs.command.speed, inputs.Flag.FlagForward, 1);
+% plot(u_cmd); clear u_cmd;
+% legend('u','u_{command}');
+% title('Longitudinal Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
+% 
+% s2 = subplot(3,1,2); hold on; grid on;
+% plot(vehicle_state.nu.rAUV_WaterSpeed.Vwater_ms);
+% title('Transversal Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
+% 
+% s3 = subplot(3,1,3); hold on; grid on;
+% plot(vehicle_state.nu.rAUV_WaterSpeed.Wwater_ms);
+% title('Lift Speed');xlabel('time (s)'); ylabel('Speed (m.s^{-1})');
+% 
+% linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
+% %% Vehicle State : AngularSpeed
+% figure('name','Angular Speed','units','normalized','outerposition',[0 0 1 1]);
+% s1 = subplot(3,1,1); hold on; grid on;
+% plot(vehicle_state.nu.AngularSpeed.P_rads.Time, ...
+%     rad2deg(vehicle_state.nu.AngularSpeed.P_rads.Data));
+% title('Roll Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
+% 
+% s2 = subplot(3,1,2); hold on; grid on;
+% plot(vehicle_state.nu.AngularSpeed.Q_rads.Time,...
+%     rad2deg(vehicle_state.nu.AngularSpeed.Q_rads.Data));
+% title('Pitch Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
+% 
+% s3 = subplot(3,1,3); hold on; grid on;
+% plot(vehicle_state.nu.AngularSpeed.R_rads.Time,...
+%     rad2deg(vehicle_state.nu.AngularSpeed.R_rads.Data));
+% r_cmd = CreateCmd(inputs.command.horizontal, inputs.Flag.FlagHorizontal, 2);
+% stairs(r_cmd.Time, rad2deg(r_cmd.Data)); clear r_cmd;
+% legend('R','R_{command}');
+% title('Yaw Rate');xlabel('time (s)'); ylabel('Angular Speed (deg.s^{-1})');
+% 
+% linkaxes([s1 s2 s3],'x'); clear s1 s2 s3;
 %% Actuators
 figure('name','actuators','units','normalized','outerposition',[0 0 1 1]);
 s1 = subplot(4,1,1); hold on; grid on;
